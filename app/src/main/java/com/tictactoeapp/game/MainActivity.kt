@@ -35,7 +35,10 @@ class MainActivity : ComponentActivity() {
 fun TicTacToeApp() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "mode_selection") {
+    NavHost(navController = navController, startDestination = "splash_screen") {
+        composable("splash_screen") {
+            SplashScreen(navController)
+        }
         composable("mode_selection") {
             ModeSelectionScreen(navController)
         }

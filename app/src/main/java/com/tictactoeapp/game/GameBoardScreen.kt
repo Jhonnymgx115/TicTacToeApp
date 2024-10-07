@@ -1,6 +1,7 @@
 package com.tictactoeapp.game
 
 import android.widget.Switch
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,7 +17,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import com.tictactoeapp.game.ui.theme.interFamily
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
@@ -210,20 +213,25 @@ fun GameCell(value: String, onClick: () -> Unit) {
     val color0 = MaterialTheme.colorScheme.secondary
     Button(
         onClick = onClick,
-        modifier = Modifier.size(100.dp),
+        modifier = Modifier.size(110.dp),
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.background)
     ) {
-        Text(
-            text = value,
-            color =
-                when{
-                    value == "X" -> colorX
-                    else -> color0
-                }
-            ,
-            style = gameText
-        )
+        when{
+            value == "X" -> Image(
+                painter = painterResource(id = R.drawable.close_bold_svgrepo_com),
+                contentDescription = "X" ,
+                modifier = Modifier.size(250.dp)
+            )
+            value == "O" -> Image(
+                painter = painterResource(id = R.drawable.circle_svgrepo_com),
+                contentDescription = "X",
+                modifier = Modifier.size(250.dp)
+            )
+            else -> {
+
+            }
+        }
     }
 }
 
