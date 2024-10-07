@@ -30,7 +30,7 @@ val textStyle = TextStyle(
     fontFamily = interFamily,
 )
 val gameText = TextStyle(
-    fontSize = 70.sp,
+    fontSize = 30.sp,
     fontWeight = FontWeight.Bold,
     fontFamily = interFamily,
 )

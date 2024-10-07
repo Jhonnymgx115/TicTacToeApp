@@ -10,29 +10,33 @@ import androidx.navigation.NavController
 
 @Composable
 fun SideSelectionScreen(navController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Pick your side",
-            style = MaterialTheme.typography.headlineMedium
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+    Box(){
+        Background()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = { navController.navigate("name_input/ai") }
+            Text(
+                text = "Pick your side",
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Text("X")
-            }
-            Button(
-                onClick = { navController.navigate("name_input/ai") }
-            ) {
-                Text("O")
+                Button(
+                    onClick = { navController.navigate("name_input/ai") }
+                ) {
+                    Text("X")
+                }
+                Button(
+                    onClick = { navController.navigate("name_input/ai") }
+                ) {
+                    Text("O")
+                }
             }
         }
     }
+
 }
