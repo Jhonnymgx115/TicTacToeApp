@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.tictactoeapp.game.ui.theme.MediumTurquoise
 
 @Composable
 fun ModeSelectionScreen(navController: NavController) {
@@ -47,6 +49,14 @@ fun ModeSelectionScreen(navController: NavController) {
                 onClick = { navController.navigate("name_input/friend") }
             ) {
                 Text("With a friend", style= textStyle)
+            }
+            Spacer(modifier = Modifier.height(50.dp))
+            Button(
+                modifier = Modifier.width(200.dp),
+                onClick = { navController.navigate("instructions") },
+                colors =  ButtonDefaults.buttonColors(MediumTurquoise)
+            ) {
+                Text("Instructions", style= textStyle)
             }
         }
     }

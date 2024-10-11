@@ -1,5 +1,6 @@
 package com.tictactoeapp.game
 
+import InstructionsScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,6 +33,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun TicTacToeApp() {
     val navController = rememberNavController()
@@ -45,7 +48,8 @@ fun TicTacToeApp() {
         composable("side_selection") {
             SideSelectionScreen(navController)
         }
-        composable("name_input/{mode}", arguments = listOf(navArgument("mode") { type = NavType.StringType })) { backStackEntry ->
+        composable("name_input/{mode}", arguments = listOf(navArgument("mode") { type = NavType.StringType }))
+        { backStackEntry ->
             val mode = backStackEntry.arguments?.getString("mode") ?: "friend"
             NameInputScreen(navController, mode)
         }
@@ -61,6 +65,9 @@ fun TicTacToeApp() {
             val player1Name = backStackEntry.arguments?.getString("player1Name") ?: "Player 1"
             val player2Name = backStackEntry.arguments?.getString("player2Name") ?: "Player 2"
             GameBoardScreen(navController, mode, player1Name, player2Name)
+        }
+        composable("instructions") {
+            InstructionsScreen(navController)
         }
     }
 }

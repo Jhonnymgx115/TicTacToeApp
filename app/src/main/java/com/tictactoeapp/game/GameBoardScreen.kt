@@ -20,6 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.tictactoeapp.game.ui.theme.interFamily
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
