@@ -39,7 +39,12 @@ val gameText = TextStyle(
 )
 
 @Composable
-fun GameBoardScreen(navController: NavController, gameMode: String, player1Name: String, player2Name: String) {
+fun GameBoardScreen(
+    navController: NavController,
+    gameMode: String,
+    player1Name: String,
+    player2Name: String
+) {
     var board by remember { mutableStateOf(List(9) { "" }) }
     var currentPlayer by remember { mutableStateOf("X") }
     var switchState by remember { mutableStateOf(true) }
@@ -86,7 +91,7 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
                 }
             } else {
                 currentPlayer = if (currentPlayer == "X") "O" else "X"
-                switchState = if (currentPlayer == "X") true else false
+                switchState = currentPlayer == "X"
                 if (gameMode == "ai" && currentPlayer == aiSide) {
                     // AI's turn
                     delay(1000)
@@ -107,38 +112,51 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ){
+        ) {
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Text(text= "X", color=MaterialTheme.colorScheme.primary, style= textStyle)
-                Text(text="${score.xWins} wins", color = MaterialTheme.colorScheme.primary, style = textStyle
+            ) {
+                Text(text = "X", color = MaterialTheme.colorScheme.primary, style = textStyle)
+                Text(
+                    text = "${score.xWins} wins",
+                    color = MaterialTheme.colorScheme.primary,
+                    style = textStyle
                 )
             }
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Text(text= "O", color=MaterialTheme.colorScheme.secondary, style=textStyle)
-                Text(text="${score.oWins} wins", color=MaterialTheme.colorScheme.secondary, style=textStyle)
+            ) {
+                Text(text = "O", color = MaterialTheme.colorScheme.secondary, style = textStyle)
+                Text(
+                    text = "${score.oWins} wins",
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = textStyle
+                )
             }
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
+            ) {
                 Icon(
                     imageVector = Icons.Default.Menu,
                     contentDescription = "Menu Icon",
                     tint = MaterialTheme.colorScheme.tertiary
                 )
-                Text(text="${score.draws} draws", color=MaterialTheme.colorScheme.tertiary, style=textStyle)
+                Text(
+                    text = "${score.draws} draws",
+                    color = MaterialTheme.colorScheme.tertiary,
+                    style = textStyle
+                )
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
-        GameBoard(board) { index ->  coroutineScope.launch {
-            makeMove(index)
-        } }
+        GameBoard(board) { index ->
+            coroutineScope.launch {
+                makeMove(index)
+            }
+        }
         Spacer(modifier = Modifier.height(16.dp))
         when {
             winner == "Draw" -> Text("It's a draw!")
@@ -146,13 +164,15 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
             else -> Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Text("Current player: ${if (currentPlayer == "X") player1Name else player2Name}",
-                    style= textStyle)
+            ) {
+                Text(
+                    "Current player: ${if (currentPlayer == "X") player1Name else player2Name}",
+                    style = textStyle
+                )
                 CustomSwitch(
                     checked = switchState,
-                    onCheckedChange = {
-                        newValue -> switchState = newValue
+                    onCheckedChange = { newValue ->
+                        switchState = newValue
                     }
                 )
             }
@@ -183,7 +203,7 @@ fun GameBoard(board: List<String>, onCellClick: (Int) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         for (row in 0 until 3) {
-            if(row >0 ){
+            if (row > 0) {
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.tertiary,
                     thickness = 4.dp,
@@ -199,7 +219,7 @@ fun GameBoard(board: List<String>, onCellClick: (Int) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 for (col in 0 until 3) {
-                    if(col >0) {
+                    if (col > 0) {
                         VerticalDivider(
                             color = MaterialTheme.colorScheme.tertiary,
                             thickness = 4.dp,
@@ -224,17 +244,19 @@ fun GameCell(value: String, onClick: () -> Unit) {
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.background)
     ) {
-        when{
+        when {
             value == "X" -> Image(
                 painter = painterResource(id = R.drawable.close_bold_svgrepo_com),
-                contentDescription = "X" ,
+                contentDescription = "X",
                 modifier = Modifier.size(250.dp)
             )
+
             value == "O" -> Image(
                 painter = painterResource(id = R.drawable.circle_svgrepo_com),
                 contentDescription = "X",
                 modifier = Modifier.size(250.dp)
             )
+
             else -> {
 
             }
@@ -243,26 +265,29 @@ fun GameCell(value: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun CustomSwitch (checked: Boolean, onCheckedChange: (Boolean) -> Unit){
-
+fun CustomSwitch(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
 
     Switch(
+        modifier = Modifier
+            .scale(1.3f)
+            .padding(10.dp),
         checked = checked,
+        enabled = false,
         onCheckedChange = onCheckedChange,
         thumbContent = if (checked) {
             {
-                Text("X", color=MaterialTheme.colorScheme.primary, style= textStyle)
+                Text("X", color = MaterialTheme.colorScheme.primary, style = textStyle)
             }
         } else {
             {
-                Text("O", color=MaterialTheme.colorScheme.secondary, style= textStyle)
+                Text("O", color = MaterialTheme.colorScheme.secondary, style = textStyle)
             }
         },
         colors = SwitchDefaults.colors(
-            checkedThumbColor = MaterialTheme.colorScheme.background,
-            checkedTrackColor = MaterialTheme.colorScheme.primary,
-            uncheckedThumbColor = MaterialTheme.colorScheme.background,
-            uncheckedTrackColor = MaterialTheme.colorScheme.secondary,
+            disabledCheckedThumbColor = MaterialTheme.colorScheme.background,
+            disabledCheckedTrackColor = MaterialTheme.colorScheme.primary,
+            disabledUncheckedThumbColor = MaterialTheme.colorScheme.background,
+            disabledUncheckedTrackColor = MaterialTheme.colorScheme.secondary,
         ),
     )
 }
