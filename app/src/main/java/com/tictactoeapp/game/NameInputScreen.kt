@@ -6,6 +6,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -22,8 +24,9 @@ fun NameInputScreen(navController: NavController, mode: String) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Enter player names",
-                style = gameText
+                modifier = Modifier.padding(horizontal = 20.dp),
+                text = stringResource(R.string.enter_player_names),
+                style = gameText.copy(textAlign = TextAlign.Center)
             )
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
@@ -37,7 +40,7 @@ fun NameInputScreen(navController: NavController, mode: String) {
                     )
                 },
                 onValueChange = { player1Name = it },
-                label = { Text("Player 1 Name") }
+                label = { Text(stringResource(R.string.player_1)) }
             )
             Spacer(modifier = Modifier.height(46.dp))
             if (mode == "friend") {
@@ -52,7 +55,7 @@ fun NameInputScreen(navController: NavController, mode: String) {
                         )
                     },
                     onValueChange = { player2Name = it },
-                    label = { Text("Player 2 Name") }
+                    label = { Text(stringResource(R.string.player_2)) }
                 )
             } else {
                 player2Name = "AI"
@@ -63,7 +66,7 @@ fun NameInputScreen(navController: NavController, mode: String) {
                     navController.navigate("game_board/$mode/${player1Name.ifEmpty { "Player 1" }}/${player2Name.ifEmpty { "Player 2" }}")
                 }
             ) {
-                Text("Start Game", style= textStyle)
+                Text(stringResource(R.string.start_game), style= textStyle)
             }
         }
     }

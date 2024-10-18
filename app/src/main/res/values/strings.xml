@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">TicTacToeApp</string>
+    <string name="choose_play_mode">Choose play mode</string>
+    <string name="play_ai">Play with AI</string>
+    <string name="with_friend">With a friend</string>
+    <string name="instructions">Instructions</string>
+    <string name="enter_player_names">Enter player names</string>
+    <string name="player_1">Player 1 Name</string>
+    <string name="player_2">Player 2 Name</string>
+    <string name="start_game">Start Game</string>
+    <string name="intro_1">Objective of the Game</string>
+    <string name="intro_2">The objective is to be the first player to form a line of three consecutive symbols (either in a row, column or diagonal) on a 3x3 board.</string>
+    <string name="intro_3">Number of Players</string>
+    <string name="intro_4">One player uses the X symbol. The other player uses the O symbol.</string>
+    <string name="intro_5">How to Play</string>
+    <string name="intro_6">Set up the board  The board is a grid of 3 rows and 3 columns (a total of 9 empty squares).  Choose who goes first  You can decide randomly or just alternate each new game.  Alternating turns  The first player will place his symbol (X or O) on any empty square on the board. Then, the second player will place his symbol (O or X) on an empty square. Players continue to alternate turns until one of them wins or the game ends in a draw.  Winning conditions  A player wins if he manages to place three of his symbols in a row, column or diagonal on the board.  Drawn game  If all the squares on the board are filled and no player has managed to form a line of three consecutive symbols, the game ends in a draw.</string>
+    <string name="wins">Wins</string>
+    <string name="draws">Draws</string>
+    <string name="its_a_draw">It\'s a draw!</string>
+    <string name="current_player">Current player:</string>
+    <string name="play_again">Play Again</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="victory">Victory!</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -28,12 +29,12 @@ fun ModeSelectionScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Tic Tac Toe",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "Choose play mode",
+                text = stringResource(R.string.choose_play_mode),
                 style = textStyle
             )
             Spacer(modifier = Modifier.height(32.dp))
@@ -41,17 +42,14 @@ fun ModeSelectionScreen(navController: NavController) {
                 modifier = Modifier.width(200.dp),
                 onClick = { navController.navigate("name_input/ai") }
             ) {
-                Text("Play with AI" ,style= textStyle)
+                Text(stringResource(R.string.play_ai) ,style= textStyle)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 modifier = Modifier.width(200.dp),
                 onClick = { navController.navigate("name_input/friend") }
-
-
-
             ) {
-                Text("With a friend", style= textStyle)
+                Text(stringResource(R.string.with_friend), style= textStyle)
             }
             Spacer(modifier = Modifier.height(50.dp))
             Button(
@@ -59,7 +57,7 @@ fun ModeSelectionScreen(navController: NavController) {
                 onClick = { navController.navigate("instructions") },
                 colors =  ButtonDefaults.buttonColors(MediumTurquoise)
             ) {
-                Text("Instructions", style= textStyle)
+                Text(stringResource(R.string.instructions), style= textStyle)
             }
         }
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Triqui</string>
+    <string name="choose_play_mode">Elige el modo de juego</string>
+    <string name="play_ai">Juega con la IA</string>
+    <string name="with_friend">Con un amigo</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="enter_player_names">Introducir los nombres de los jugadores</string>
+    <string name="player_1">Nombre del jugador 1</string>
+    <string name="player_2">Nombre del jugador 2</string>
+    <string name="start_game">Iniciar juego</string>
+    <string name="intro_1">Objetivo del Juego</string>
+    <string name="intro_2">El objetivo es ser el primer jugador en formar una línea de tres símbolos consecutivos (ya sea en fila, columna o diagonal) en un tablero de 3x3.</string>
+    <string name="intro_3">Número de Jugadores</string>
+    <string name="intro_4">Un jugador utiliza el símbolo X. El otro jugador utiliza el símbolo O.</string>
+    <string name="intro_5">Cómo Jugar</string>
+    <string name="intro_6">Prepara el tablero  \n\nEl tablero es una cuadrícula de 3 filas y 3 columnas (un total de 9 casillas vacías).  \n\nElige quién va primero  \n\nPuedes decidir al azar o simplemente alternar en cada nueva partida.  \n\nTurnos alternos  \n\nEl primer jugador colocará su símbolo (X u O) en cualquier casilla vacía del tablero. Luego, el segundo jugador colocará su símbolo (O o X) en una casilla vacía. Los jugadores continúan alternando turnos hasta que uno de ellos gane o el juego termine en empate.  \n\nCondiciones para ganar  \n\nUn jugador gana si logra colocar tres de sus símbolos consecutivos en una fila, columna o diagonal del tablero.  \n\nJuego empatado  \n\nSi todas las casillas del tablero están llenas y ningún jugador ha logrado formar una línea de tres símbolos consecutivos, el juego termina en empate.</string>
+    <string name="wins">Victorias</string>
+    <string name="draws">Empate</string>
+    <string name="its_a_draw">¡Es un empate!</string>
+    <string name="current_player">Jugador actual:</string>
+    <string name="play_again">Jugar de nuevo</string>
+    <string name="back_to_menu">Volver al menú</string>
+    <string name="victory">Victoria!</string>
+</resources>

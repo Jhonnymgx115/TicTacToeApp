@@ -10,9 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tictactoeapp.game.Background
+import com.tictactoeapp.game.R
 
 @Composable()
 fun InstructionsScreen(navController: NavController){
@@ -23,29 +25,17 @@ fun InstructionsScreen(navController: NavController){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TextTitle("Objetivo del Juego")
+            TextTitle(stringResource(R.string.intro_1))
             Spacer(modifier = Modifier.height(20.dp))
-            TextBody("El objetivo es ser el primer jugador en formar una línea de tres símbolos consecutivos (ya sea en fila, columna o diagonal) en un tablero de 3x3.")
+            TextBody(stringResource(R.string.intro_2))
             Spacer(modifier = Modifier.height(20.dp))
-            TextTitle("Número de Jugadores")
+            TextTitle(stringResource(R.string.intro_3))
             Spacer(modifier = Modifier.height(20.dp))
-            TextBody("Un jugador utilizará el símbolo X.\n" +
-                    "El otro jugador utilizará el símbolo O.")
+            TextBody(stringResource(R.string.intro_4))
             Spacer(modifier = Modifier.height(20.dp))
-            TextTitle("Cómo Jugar")
+            TextTitle(stringResource(R.string.intro_5))
             Spacer(modifier = Modifier.height(20.dp))
-            TextBody("Prepara el tablero:\n" +
-                    "El tablero es una cuadrícula de 3 filas y 3 columnas (un total de 9 casillas vacías).\n" +
-                    "Elige quién va primero:\n" +
-                    "Puedes decidir al azar o simplemente alternar en cada nueva partida.\n" +
-                    "Turnos alternos:\n" +
-                    "El primer jugador colocará su símbolo (X u O) en cualquier casilla vacía del tablero.\n" +
-                    "Luego, el segundo jugador colocará su símbolo (O o X) en una casilla vacía.\n" +
-                    "Los jugadores continúan alternando turnos hasta que uno de ellos gane o el juego termine en empate.\n" +
-                    "Condiciones para ganar:\n" +
-                    "Un jugador gana si logra colocar tres de sus símbolos consecutivos en una fila, columna o diagonal del tablero.\n" +
-                    "Juego empatado:\n" +
-                    "Si todas las casillas del tablero están llenas y ningún jugador ha logrado formar una línea de tres símbolos consecutivos, el juego termina en empate.")
+            TextBody(stringResource(R.string.intro_6))
             Spacer(modifier = Modifier.height(20.dp))
         }
     }

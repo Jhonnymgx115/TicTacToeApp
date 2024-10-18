@@ -26,6 +26,7 @@ import kotlinx.coroutines.*
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
@@ -116,7 +117,7 @@ fun GameBoardScreen(
             ) {
                 Text(text = "X", color = MaterialTheme.colorScheme.primary, style = textStyle)
                 Text(
-                    text = "${score.xWins} wins",
+                    text = "${score.xWins} " + stringResource(R.string.wins),
                     color = MaterialTheme.colorScheme.primary,
                     style = textStyle
                 )
@@ -127,7 +128,7 @@ fun GameBoardScreen(
             ) {
                 Text(text = "O", color = MaterialTheme.colorScheme.secondary, style = textStyle)
                 Text(
-                    text = "${score.oWins} wins",
+                    text = "${score.oWins} " + stringResource(R.string.wins),
                     color = MaterialTheme.colorScheme.secondary,
                     style = textStyle
                 )
@@ -142,7 +143,7 @@ fun GameBoardScreen(
                     tint = MaterialTheme.colorScheme.tertiary
                 )
                 Text(
-                    text = "${score.draws} draws",
+                    text = "${score.draws} " + stringResource(R.string.draws),
                     color = MaterialTheme.colorScheme.tertiary,
                     style = textStyle
                 )
@@ -156,14 +157,14 @@ fun GameBoardScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
         when {
-            winner == "Draw" -> Text("It's a draw!")
-            winner != null -> Text("${if (winner == "X") player1Name else player2Name} wins!")
+            winner == "Draw" -> Text(stringResource(R.string.its_a_draw))
+            winner != null -> Text("${if (winner == "X") player1Name else player2Name} "+ stringResource(R.string.victory))
             else -> Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "Current player: ${if (currentPlayer == "X") player1Name else player2Name}",
+                    stringResource(R.string.current_player) + " ${if (currentPlayer == "X") player1Name else player2Name}",
                     style = textStyle
                 )
                 CustomSwitch(checked = switchState, onCheckedChange = { newValue ->
@@ -181,12 +182,12 @@ fun GameBoardScreen(
                 winner = null
                 isGameOver = false
             }) {
-                Text("Play Again")
+                Text(stringResource(R.string.play_again))
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { navController.navigate("mode_selection") }) {
-            Text("Back to Menu")
+            Text(stringResource(R.string.back_to_menu))
         }
     }
 }
