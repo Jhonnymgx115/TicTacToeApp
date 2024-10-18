@@ -45,9 +45,6 @@ fun TicTacToeApp() {
         composable("mode_selection") {
             ModeSelectionScreen(navController)
         }
-        composable("side_selection") {
-            SideSelectionScreen(navController)
-        }
         composable("name_input/{mode}", arguments = listOf(navArgument("mode") { type = NavType.StringType }))
         { backStackEntry ->
             val mode = backStackEntry.arguments?.getString("mode") ?: "friend"

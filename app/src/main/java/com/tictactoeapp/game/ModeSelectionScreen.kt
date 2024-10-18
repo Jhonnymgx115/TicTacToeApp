@@ -39,7 +39,7 @@ fun ModeSelectionScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
             Button(
                 modifier = Modifier.width(200.dp),
-                onClick = { navController.navigate("side_selection") }
+                onClick = { navController.navigate("name_input/ai") }
             ) {
                 Text("Play with AI" ,style= textStyle)
             }
