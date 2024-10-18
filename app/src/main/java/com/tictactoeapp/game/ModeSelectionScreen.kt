@@ -47,6 +47,9 @@ fun ModeSelectionScreen(navController: NavController) {
             Button(
                 modifier = Modifier.width(200.dp),
                 onClick = { navController.navigate("name_input/friend") }
+
+
+
             ) {
                 Text("With a friend", style= textStyle)
             }

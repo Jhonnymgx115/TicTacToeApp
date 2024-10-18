@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.tictactoeapp.game.ui.theme.interFamily
+import kotlinx.coroutines.*
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
 
@@ -45,6 +46,7 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
     var winner by remember { mutableStateOf<String?>(null) }
     var isGameOver by remember { mutableStateOf(false) }
     var score by remember { mutableStateOf(Score()) }
+    val coroutineScope = rememberCoroutineScope()
 
     val aiSide = if (gameMode == "ai") "O" else null
 
@@ -71,7 +73,7 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
         return null
     }
 
-    fun makeMove(index: Int) {
+    suspend fun makeMove(index: Int) {
         if (board[index].isEmpty() && !isGameOver) {
             board = board.toMutableList().also { it[index] = currentPlayer }
             winner = checkWinner(board)
@@ -87,6 +89,7 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
                 switchState = if (currentPlayer == "X") true else false
                 if (gameMode == "ai" && currentPlayer == aiSide) {
                     // AI's turn
+                    delay(1000)
                     val aiMove = board.indices.filter { board[it].isEmpty() }.random()
                     makeMove(aiMove)
                 }
@@ -133,7 +136,9 @@ fun GameBoardScreen(navController: NavController, gameMode: String, player1Name:
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
-        GameBoard(board) { index -> makeMove(index) }
+        GameBoard(board) { index ->  coroutineScope.launch {
+            makeMove(index)
+        } }
         Spacer(modifier = Modifier.height(16.dp))
         when {
             winner == "Draw" -> Text("It's a draw!")
