@@ -2,6 +2,7 @@ package com.tictactoeapp.game
 
 import InstructionsScreen
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,16 +28,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TicTacToeApp()
+                    SetupNavGraph()
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun TicTacToeApp() {
+fun SetupNavGraph() {
+
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "splash_screen") {
@@ -45,7 +47,10 @@ fun TicTacToeApp() {
         composable("mode_selection") {
             ModeSelectionScreen(navController)
         }
-        composable("name_input/{mode}", arguments = listOf(navArgument("mode") { type = NavType.StringType }))
+        composable(
+            "name_input/{mode}",
+            arguments = listOf(navArgument("mode") { type = NavType.StringType })
+        )
         { backStackEntry ->
             val mode = backStackEntry.arguments?.getString("mode") ?: "friend"
             NameInputScreen(navController, mode)
