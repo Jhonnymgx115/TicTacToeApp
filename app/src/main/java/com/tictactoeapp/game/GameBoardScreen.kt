@@ -1,6 +1,9 @@
 package com.tictactoeapp.game
 
-import android.widget.Switch
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -13,17 +16,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.tictactoeapp.game.ui.theme.interFamily
 import kotlinx.coroutines.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
 
@@ -40,10 +43,7 @@ val gameText = TextStyle(
 
 @Composable
 fun GameBoardScreen(
-    navController: NavController,
-    gameMode: String,
-    player1Name: String,
-    player2Name: String
+    navController: NavController, gameMode: String, player1Name: String, player2Name: String
 ) {
     var board by remember { mutableStateOf(List(9) { "" }) }
     var currentPlayer by remember { mutableStateOf("X") }
@@ -63,10 +63,7 @@ fun GameBoardScreen(
         )
 
         for (combination in winningCombinations) {
-            if (board[combination[0]] != "" &&
-                board[combination[0]] == board[combination[1]] &&
-                board[combination[0]] == board[combination[2]]
-            ) {
+            if (board[combination[0]] != "" && board[combination[0]] == board[combination[1]] && board[combination[0]] == board[combination[2]]) {
                 return board[combination[0]]
             }
         }
@@ -169,12 +166,9 @@ fun GameBoardScreen(
                     "Current player: ${if (currentPlayer == "X") player1Name else player2Name}",
                     style = textStyle
                 )
-                CustomSwitch(
-                    checked = switchState,
-                    onCheckedChange = { newValue ->
-                        switchState = newValue
-                    }
-                )
+                CustomSwitch(checked = switchState, onCheckedChange = { newValue ->
+                    switchState = newValue
+                })
             }
 
 
@@ -234,35 +228,67 @@ fun GameBoard(board: List<String>, onCellClick: (Int) -> Unit) {
     }
 }
 
+
 @Composable
 fun GameCell(value: String, onClick: () -> Unit) {
-    val colorX = MaterialTheme.colorScheme.primary
-    val color0 = MaterialTheme.colorScheme.secondary
+    val visible = remember { mutableStateOf(value.isNotEmpty()) }
+    val durationAnimation = 5000
+
+    LaunchedEffect(value) {
+        visible.value = value.isNotEmpty()
+    }
+
     Button(
-        onClick = onClick,
+        onClick = { onClick() },
         modifier = Modifier.size(110.dp),
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.background)
     ) {
-        when {
-            value == "X" -> Image(
-                painter = painterResource(id = R.drawable.close_bold_svgrepo_com),
-                contentDescription = "X",
-                modifier = Modifier.size(250.dp)
-            )
+        when (value) {
+            "X" -> {
+                AnimatedVisibility(
+                    visible = visible.value, enter = fadeIn(
+                        // Overwrites the initial value of alpha to 0.4f for fade in, 0 by default
+                        initialAlpha = 0.1f
+                    ), exit = fadeOut(
+                        // Overwrites the default animation with tween
+                        animationSpec = tween(durationMillis = durationAnimation)
+                    )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.close_bold_svgrepo_com),
+                        contentDescription = "X",
+                        modifier = Modifier.size(250.dp) // Aplicar escala a la imagen
+                    )
+                }
 
-            value == "O" -> Image(
-                painter = painterResource(id = R.drawable.circle_svgrepo_com),
-                contentDescription = "X",
-                modifier = Modifier.size(250.dp)
-            )
+            }
+
+            "O" -> {
+                AnimatedVisibility(
+                    visible = visible.value, enter = fadeIn(
+                        // Overwrites the initial value of alpha to 0.4f for fade in, 0 by default
+                        initialAlpha = 0.1f
+                    ), exit = fadeOut(
+                        // Overwrites the default animation with tween
+                        animationSpec = tween(durationMillis = durationAnimation)
+                    )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.circle_svgrepo_com),
+                        contentDescription = "O",
+                        modifier = Modifier.size(250.dp) // Aplicar escala a la imagen
+                    )
+                }
+            }
 
             else -> {
-
             }
         }
     }
+
 }
+
 
 @Composable
 fun CustomSwitch(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
