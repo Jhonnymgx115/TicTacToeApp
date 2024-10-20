@@ -27,6 +27,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.compose.*
 
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
@@ -53,8 +55,10 @@ fun GameBoardScreen(
     var isGameOver by remember { mutableStateOf(false) }
     var score by remember { mutableStateOf(Score()) }
     val coroutineScope = rememberCoroutineScope()
-
+    var showDialog by remember { mutableStateOf(false) }
     val aiSide = if (gameMode == "ai") "O" else null
+
+
 
     fun checkWinner(board: List<String>): String? {
         val winningCombinations = listOf(
@@ -175,14 +179,35 @@ fun GameBoardScreen(
 
         }
         if (isGameOver) {
-            Button(onClick = {
-                board = List(9) { "" }
-                currentPlayer = "X"
-                switchState = true
-                winner = null
-                isGameOver = false
-            }) {
-                Text(stringResource(R.string.play_again))
+            showDialog = true
+            if(winner != "Draw"){
+                winAnimation()
+            }
+            if (showDialog){
+                popUp(onDismiss = {
+                    showDialog = false
+                    isGameOver=false
+                    navController.navigate("mode_selection")
+                },
+                    onConfirmation = {
+                        board = List(9) { "" }
+                        currentPlayer = "X"
+                        switchState = true
+                        winner = null
+                        isGameOver = false
+                        showDialog=false
+                    },
+                    when{
+                        winner == "Draw" -> painterResource(id = R.drawable.draw)
+                        winner == "X" -> painterResource(id = R.drawable.close_bold_svgrepo_com)
+                        else -> painterResource(id = R.drawable.circle_svgrepo_com)
+                    },
+                    when (winner){
+                        "Draw" -> stringResource(R.string.its_a_draw).toString()
+                        "X" -> (player1Name + " " + stringResource(R.string.victory)).toString()
+                        else -> (player2Name + " " + stringResource(R.string.victory)).toString()
+                    }
+                )
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -316,5 +341,18 @@ fun CustomSwitch(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
             disabledUncheckedThumbColor = MaterialTheme.colorScheme.background,
             disabledUncheckedTrackColor = MaterialTheme.colorScheme.secondary,
         ),
+    )
+}
+
+@Composable
+fun winAnimation (){
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.confetti))
+    val progress by animateLottieCompositionAsState(composition)
+
+    // Muestra la animación
+    LottieAnimation(
+        composition,
+        progress,
+        modifier = Modifier.fillMaxSize()
     )
 }
