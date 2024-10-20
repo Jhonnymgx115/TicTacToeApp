@@ -303,7 +303,7 @@ fun GameCell(value: String, onClick: () -> Unit) {
                     Image(
                         painter = painterResource(id = R.drawable.circle_svgrepo_com),
                         contentDescription = "O",
-                        modifier = Modifier.size(250.dp) // Aplicar escala a la imagen
+                        modifier = Modifier.size(250.dp)
                     )
                 }
             }

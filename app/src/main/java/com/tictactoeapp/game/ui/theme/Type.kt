@@ -15,6 +15,10 @@ val interFamily = FontFamily(
     Font(R.font.inter_18pt_regular, FontWeight.Normal),
     Font(R.font.inter_18pt_bold, FontWeight.SemiBold)
 )
+
+val bebasNeueFamily = FontFamily(
+    Font(R.font.bebasneue_regular, FontWeight.Normal)
+)
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = interFamily,

@@ -71,5 +71,8 @@ fun SetupNavGraph() {
         composable("instructions") {
             InstructionsScreen(navController)
         }
+        composable("about"){
+            AboutView(navController)
+        }
     }
 }

@@ -10,18 +10,39 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.tictactoeapp.game.ui.theme.MediumTurquoise
+import com.tictactoeapp.game.ui.theme.bebasNeueFamily
 
 @Composable
 fun ModeSelectionScreen(navController: NavController) {
     Box(){
 
        Background()
+
+        Button(onClick = {navController.navigate("about")},
+            modifier = Modifier
+                .align(Alignment.TopEnd),
+            colors = ButtonDefaults.buttonColors(
+                containerColor =  Color.Transparent,
+                contentColor = MaterialTheme.colorScheme.primary
+            )
+        )
+
+        {
+            Icon(
+                painter = painterResource(R.drawable.info_circle_svgrepo_com),
+                contentDescription = null,
+                modifier = Modifier.size(50.dp)
+            )
+        }
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -30,7 +51,11 @@ fun ModeSelectionScreen(navController: NavController) {
         ) {
             Text(
                 text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.titleLarge
+                style = TextStyle(
+                    fontFamily = bebasNeueFamily,
+                    fontSize = 80.sp,
+                    letterSpacing = 1.sp
+                ),
             )
             Spacer(modifier = Modifier.height(32.dp))
             Text(
