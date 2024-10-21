@@ -27,15 +27,6 @@ fun NameInputScreen(navController: NavController, mode: String) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.app_name),
-                style = TextStyle(
-                    fontFamily = bebasNeueFamily,
-                    fontSize = 80.sp,
-                    letterSpacing = 1.sp
-                ),
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            Text(
                 modifier = Modifier.padding(horizontal = 20.dp),
                 text = stringResource(R.string.enter_player_names),
                 style = gameText.copy(textAlign = TextAlign.Center)
