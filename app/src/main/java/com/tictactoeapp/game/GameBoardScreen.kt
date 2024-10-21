@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.compose.*
+import com.tictactoeapp.game.ui.theme.bebasNeueFamily
 
 
 data class Score(var xWins: Int = 0, var oWins: Int = 0, var draws: Int = 0)
@@ -109,6 +110,15 @@ fun GameBoardScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = stringResource(R.string.app_name),
+            style = TextStyle(
+                fontFamily = bebasNeueFamily,
+                fontSize = 80.sp,
+                letterSpacing = 1.sp
+            ),
+        )
+        Spacer(modifier = Modifier.height(32.dp))
         Spacer(modifier = Modifier.height(12.dp))
         Spacer(modifier = Modifier.height(10.dp))
         Row(
